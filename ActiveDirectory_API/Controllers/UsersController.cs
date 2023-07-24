@@ -122,13 +122,47 @@ namespace ActiveDirectory_API.Controllers
                     status_code = (int)HttpStatusCode.OK,
                     Message = "Success",
                     data = data,
-                    //Count = data.ToArray().Length
+                    Count = data.ToArray().Length
                 });
             }
             catch (Exception ex)
             {
 
                 return BadRequest(new APIResponse
+                {
+                    status_code = (int)HttpStatusCode.BadRequest,
+                    Message = ex.Message.ToString(),
+                    Count = 0
+                });
+            }
+        }
+
+        [Route("GetUserDataFormattedWithDDB")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserDataFormattedWithDDB()
+        {
+            try
+            {
+                var data = await _user.GetUserDataFormatted();
+                var designations = await _user.GetDesignationDataFormatted();
+                var departments = await _user.GetDepartmentDataFormatted();
+                var branches = await _user.GetBranchDataFormatted();
+
+                return Ok(new APIResponses
+                {
+                    status_code = (int)HttpStatusCode.OK,
+                    Message = "Success",
+                    data = data,
+                    designations = designations,
+                    departments = departments,
+                    branches = branches,
+                    Count = data.ToArray().Length
+                });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new APIResponses
                 {
                     status_code = (int)HttpStatusCode.BadRequest,
                     Message = ex.Message.ToString(),

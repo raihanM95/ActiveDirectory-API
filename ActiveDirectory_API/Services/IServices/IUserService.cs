@@ -7,6 +7,9 @@ namespace ActiveDirectory_API.Repositories.IRepositories
     {
         Task<bool> AuthenticateUser(UserCredential user);
         Task<SearchResultCollection> GetAllUsersData();
+        Task<List<Branch>> GetBranchDataFormatted();
+        Task<List<Department>> GetDepartmentDataFormatted();
+        Task<List<Designation>> GetDesignationDataFormatted();
         Task<SearchResult> GetUserData(string username);
         Task<List<User>> GetUserDataFormatted();
     }
