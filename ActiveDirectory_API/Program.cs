@@ -27,8 +27,18 @@ var app = builder.Build();
 //    app.UseSwaggerUI();
 //}
 
-app.UseSwagger();
-app.UseSwaggerUI();
+bool enableSwagger = builder.Configuration.GetValue<bool>("AppSettings:Swagger");
+//app.UseSwagger();
+//app.UseSwaggerUI();
+if (enableSwagger)
+{
+    // Enable Swagger middleware
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AD API V1");
+    });
+}
 
 app.UseHttpsRedirection();
 
