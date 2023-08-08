@@ -106,7 +106,8 @@ namespace ActiveDirectory_API.Repositories
 
                     DirectorySearcher searcher = new DirectorySearcher(entry);
                     searcher.PageSize = 1000;
-                    searcher.Filter = "(objectClass=user)";
+                    //searcher.Filter = "(objectClass=user)";
+                    searcher.Filter = $"(&(objectClass=user)(userAccountControl=512))";
                     searcher.PropertiesToLoad.Add("*"); // Load all properties for each user
 
                     SearchResultCollection results = searcher.FindAll();
@@ -159,7 +160,8 @@ namespace ActiveDirectory_API.Repositories
 
                     DirectorySearcher searcher = new DirectorySearcher(entry);
                     searcher.PageSize = 1000;
-                    searcher.Filter = "(objectClass=user)";
+                    //searcher.Filter = "(objectClass=user)";
+                    searcher.Filter = $"(&(objectClass=user)(userAccountControl=512))";
                     searcher.PropertiesToLoad.Add("*"); // Load all properties for each user
 
                     List<User> users = new List<User>();
